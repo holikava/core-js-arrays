@@ -370,8 +370,12 @@ function createChunks(/* arr, chunkSize */) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  return Array(len)
+    .fill(1)
+    .map((value, index) => {
+      return value + index * 2;
+    });
 }
 
 /**
@@ -402,8 +406,15 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  let count = 0;
+  arr.map((value) => {
+    if (!value) {
+      count += 1;
+    }
+    return count;
+  });
+  return count;
 }
 
 /**
@@ -424,8 +435,16 @@ function getFalsyValuesCount(/* arr */) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  let result = new Array(n);
+  result.fill(0);
+  result = result.map((value, index) => {
+    const subArr = new Array(n);
+    subArr.fill(0);
+    subArr[index] = 1;
+    return subArr;
+  });
+  return result;
 }
 
 /**
@@ -439,8 +458,15 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  const newArr = [];
+  numbers.map((value, index) => {
+    if (value % 2 !== 0) {
+      newArr.push(index);
+    }
+    return newArr;
+  });
+  return newArr;
 }
 
 /**
@@ -487,8 +513,9 @@ function getMaxItems(/* arr, n */) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  const newArr = arr1.filter((value) => arr2.includes(value));
+  return newArr;
 }
 
 /**
@@ -520,8 +547,13 @@ function findLongestIncreasingSubsequence(/* nums */) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  const result = arr.map((value, index) => {
+    const part = new Array(index + 1);
+    part.fill(value);
+    return part;
+  });
+  return result.flat();
 }
 
 /**
@@ -554,8 +586,28 @@ function shiftArray(/* arr, n */) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const names = [
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+
+  return arr.sort((a, b) => {
+    if (names.indexOf(a) < names.indexOf(b)) {
+      return -1;
+    }
+    if (names.indexOf(a) > names.indexOf(b)) {
+      return 1;
+    }
+    return 0;
+  });
 }
 
 /**
@@ -577,8 +629,21 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const mid = Math.floor(arr.length / 2);
+  let result = [];
+  let tail = [];
+  let head = [];
+  if (arr.length % 2 === 0) {
+    head = arr.slice(0, mid);
+    tail = arr.slice(mid);
+  } else {
+    head = arr.slice(0, mid);
+    tail = arr.slice(mid + 1);
+    tail.push(arr[mid]);
+  }
+  result = tail.concat(head);
+  return result;
 }
 
 module.exports = {
